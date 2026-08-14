@@ -77,15 +77,7 @@ token_path = os.path.expanduser("~/Documents/bot-key.txt")
 
 load_dotenv()
 
-BOT_TOKEN = os.
-
-try:
-    with open(token_path, "r") as file:
-        BOT_TOKEN = file.read().strip()
-    if not BOT_TOKEN:
-        raise ValueError("The bot-key.txt file is empty.")
-    bot.run(BOT_TOKEN)
-except FileNotFoundError:
-    print(f"Error: Could not find the key file at {token_path}")
-except Exception as e:
-    print(f"An error occurred while reading the key: {e}")
+BOT_TOKEN = os.getenv("DISCORD_API")
+if not BOT_TOKEN:
+    raise ValueError("The environemtnal variable DISCORD_API is empty. Please replace it with the bot token.")
+bot.run(BOT_TOKEN)

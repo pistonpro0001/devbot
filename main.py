@@ -128,8 +128,6 @@ async def pypi_package(interaction: discord.Interaction, name: str):
     
     await interaction.followup.send(output)
 
-token_path = os.path.expanduser("~/Documents/bot-key.txt")
-
 load_dotenv()
 
 BOT_TOKEN = os.getenv("DISCORD_API")

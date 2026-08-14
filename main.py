@@ -105,7 +105,7 @@ def get_pypi_package_details(package_name):
     
 @bot.tree.command(name="pypi", description="Displays a PyPI package by it's name.")
 @app_commands.describe(name="The pypi package name")
-async def xkcd_comic(interaction: discord.Interaction, name: str):
+async def pypi_package(interaction: discord.Interaction, name: str):
     if not name:
         await interaction.response.send_message("[ERROR] Must specify PyPI package.", ephemeral=True)
         return

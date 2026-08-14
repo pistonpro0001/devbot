@@ -1,6 +1,6 @@
 # Contributing
 
-First, thank you that you want to spend your time helping to make the project better! It's very appreciated <3
+First, thank you for wanting to spend your time helping make this project better! It's very appreciated <3
 
 ## Requirements
 
@@ -9,7 +9,7 @@ First, thank you that you want to spend your time helping to make the project be
 
 ### No LLM
 
-Due to a current [black-box nature of LLMs](https://archive.ph/2026.03.06-144058/https://alexeyondata.substack.com/p/how-i-dropped-our-production-database), a bad [impact on the environment](https://en.wikipedia.org/wiki/Environmental_impact_of_AI), legal issues (such as [no copyright mentions in the generated codes from GitHub Copilot](https://githubcopilotinvestigation.com/)) and many other problems, any commits, issues or PRs must not contain LLM responses or/and a help from LLM. Even if it was reviewed by a human, it will be rejected.
+Due to the current [black-box nature of LLMs](https://archive.ph/2026.03.06-144058/https://alexeyondata.substack.com/p/how-i-dropped-our-production-database), a bad [impact on the environment](https://en.wikipedia.org/wiki/Environmental_impact_of_AI), legal issues (such as [no copyright mentions in the generated codes from GitHub Copilot](https://githubcopilotinvestigation.com/)) and many other problems, any commits, issues or PRs must not contain LLM responses and/or a help from LLM. Even if it was reviewed by a human, it will be rejected.
 
 ## Guidelines
 

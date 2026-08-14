@@ -11,6 +11,7 @@ import urllib.request
 import json
 import socket
 from dotenv import load_dotenv
+import requests
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -72,6 +73,60 @@ async def xkcd_comic(interaction: discord.Interaction, n: int):
             await interaction.followup.send(f"Failed to fetch comic data (HTTP Status {e.code}).")
     except Exception as e:
         await interaction.followup.send(f"An unexpected internal error occurred: {e}")
+        
+def get_pypi_package_details(package_name):
+    url = f"https://pypi.org/pypi/{package_name}/json"
+    
+    try:
+        response = requests.get(url)
+        
+        if response.status_code == 404:
+            return f"Error: Package '{package_name}' not found on PyPI."
+            
+        response.raise_for_status()
+        data = response.json()
+        
+        info = data.get("info", {})
+        
+        return (
+            info.get("name"),
+            info.get("version"),
+            info.get("summary"),
+            info.get("author"),
+            info.get("license"),
+            info.get("home_page"),
+            info.get("project_url"),
+            info.get("requires_dist") or [],
+            list(data.get("releases", {}).keys())
+        )
+        
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred while connecting to PyPI: {e}"
+    
+@bot.tree.command(name="pypi", description="Displays a PyPI package by it's name.")
+@app_commands.describe(name="The pypi package name")
+async def xkcd_comic(interaction: discord.Interaction, name: str):
+    if not name:
+        await interaction.response.send_message("[ERROR] Must specify PyPI package.", ephemeral=True)
+        return
+
+    await interaction.response.defer()
+    
+    package_details = get_pypi_package_details(name)
+    
+    if isinstance(package_details, str):
+        await interaction.followup.send(package_details)
+        
+    name, version, summary, author, _license, home_page, project_url, requires_dist, releases = package_details
+    
+    output = (
+                f"*** {name} v{version} by {author}***\n"
+                f"{summary}\n"
+                f"{len(releases)} total releases\n"
+                f"{project_url}"
+            )
+    
+    await interaction.followup.send(output)
 
 token_path = os.path.expanduser("~/Documents/bot-key.txt")
 

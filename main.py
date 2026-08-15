@@ -140,5 +140,5 @@ load_dotenv()
 
 BOT_TOKEN = os.getenv("DISCORD_API")
 if not BOT_TOKEN:
-    raise ValueError("The environemtnal variable DISCORD_API is empty. Please replace it with the bot token.")
+    raise ValueError("The environmental variable DISCORD_API is empty. Please replace it with the bot token.")
 bot.run(BOT_TOKEN)

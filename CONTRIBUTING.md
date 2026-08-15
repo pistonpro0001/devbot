@@ -6,6 +6,7 @@ First, thank you for wanting to spend your time helping make this project better
 
 1. By making PR, you agree that your code will be published under the [MIT License](https://opensource.org/license/MIT).
 2. You agree to our [No LLM](#no-llm) rule.
+3. You agree to follow the [style guidelines](#style-guidelines) when making changes to the code.
 
 ### No LLM
 
@@ -27,6 +28,10 @@ Create an issue and PR, if you...
 - Know how to realize the feature or fix the bug you found.
 
 If none of these cases are yours, then create an issue about your case and we'll discuss it.
+
+### Style Guidelines
+
+The project follows [PEP 8](https://peps.python.org/pep-0008/). The only change is a maximum line length: limit all lines to a maximum of 120 symbols.
 
 ## Security
 

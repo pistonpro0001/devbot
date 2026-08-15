@@ -1,2 +1,4 @@
 discord.py~=2.3.2
 python-dotenv~=1.0.0
+audioop-lts; python_version>='3.13'
+requests~=2.34.2

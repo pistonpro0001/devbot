@@ -34,14 +34,15 @@ async def on_message(message):
     was_mentioned = bot.user in message.mentions
     is_reply_to_bot = False
     
-    if message.reference and message.reference.cached_message:
-        is_reply_to_bot = message.reference.cached_message.author == bot.user
-    elif message.reference and not message.reference.cached_message:
-        try:
-            original_msg = await message.channel.fetch_message(message.reference.message_id)
-            is_reply_to_bot = original_msg.author == bot.user
-        except discord.HTTPException:
-            pass
+    if message.reference:
+        if message.reference.cached_message:
+            is_reply_to_bot = message.reference.cached_message.author == bot.user
+        else:
+            try:
+                original_msg = await message.channel.fetch_message(message.reference.message_id)
+                is_reply_to_bot = original_msg.author == bot.user
+            except discord.HTTPException:
+                pass
 
     if was_mentioned or is_reply_to_bot:
         await message.reply("beep boop this is my impression of a non-commital robot")

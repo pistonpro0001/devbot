@@ -31,21 +31,21 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    was_mentioned = bot.user in message.mentions
+    was_mentioned = bot.user in message.mentions # message.mentions stores all @ mentions
     is_reply_to_bot = False
     
-    if message.reference:
-        if message.reference.cached_message:
-            is_reply_to_bot = message.reference.cached_message.author == bot.user
+    if message.reference: # Is the message a refrence to anyone (reply or mention)?
+        if message.reference.cached_message: # Does the bot already has the original message saved in its memory?
+            is_reply_to_bot = message.reference.cached_message.author == bot.user # Check if the message it replied to was from the bot
         else:
             try:
-                original_msg = await message.channel.fetch_message(message.reference.message_id)
-                is_reply_to_bot = original_msg.author == bot.user
+                original_msg = await message.channel.fetch_message(message.reference.message_id) # Get the original message replied to
+                is_reply_to_bot = original_msg.author == bot.user # Check if the message it replied to was from the bot
             except discord.HTTPException:
                 pass
 
     if was_mentioned or is_reply_to_bot:
-        await message.reply("beep boop this is my impression of a non-commital robot")
+        await message.reply("beep boop this is my impression of a non-commital robot") # Reply to the message with a funny comment ig
     await bot.process_commands(message)
 
 @bot.tree.command(name="xkcd", description="Displays an xkcd comic by its number.")

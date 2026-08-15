@@ -1,0 +1,26 @@
+minimum_prek_version = "0.4.13"
+
+[[repos]]
+repo = "builtin"
+hooks = [
+    { id = "trailing-whitespace" },
+    { id = "check-added-large-files" },
+    { id = "check-case-conflict" },
+    { id = "check-illegal-windows-names" },
+    { id = "end-of-file-fixer" },
+    { id = "fix-byte-order-marker" },
+    { id = "forbid-new-submodules" },
+    { id = "check-json" },
+    { id = "check-json5" },
+    { id = "pretty-format-json", args = ["--autofix"] },
+    { id = "check-toml" },
+    { id = "check-yaml" },
+    { id = "mixed-line-ending", args = ["--fix=lf"] },
+    { id = "check-symlinks" },
+    { id = "destroyed-symlinks" },
+    { id = "check-merge-conflict" },
+    { id = "detect-private-key" },
+    { id = "no-commit-to-branch" },
+    { id = "check-executables-have-shebangs" },
+    { id = "check-shebang-scripts-are-executable" },
+]

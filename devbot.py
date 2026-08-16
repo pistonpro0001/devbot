@@ -1,3 +1,7 @@
+"""A dev bot for Discord"""
+
+__version__ = "0.1.0"
+
 import discord
 from discord import app_commands
 from discord.ext import commands

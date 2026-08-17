@@ -18,3 +18,8 @@ dependencies = [
 
 [project.urls]
 Home = "https://github.com/pistonpro0001/devbot"
+
+[dependency-groups]
+dev = [
+    "prek~=0.4.13",
+]

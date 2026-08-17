@@ -29,7 +29,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
-        return
+        return None
 
     was_mentioned = bot.user in message.mentions # message.mentions stores all @ mentions
     is_reply_to_bot = False
@@ -45,7 +45,7 @@ async def on_message(message):
                 pass
 
     if was_mentioned or is_reply_to_bot:
-        await message.reply("beep boop this is my impression of a non-commital robot") # Reply to the message with a funny comment ig
+        await message.reply("beep boop this is my impression of a non-commital robot")
     await bot.process_commands(message)
 
 @bot.tree.command(name="xkcd", description="Displays an xkcd comic by its number.")

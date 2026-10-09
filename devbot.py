@@ -22,20 +22,6 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-USER_PROFILES = {}
-GAME_STATE = {"active": False, "word": "", "category": ""}
-
-def get_or_create_profile(user_id, username):
-    if user_id not in USER_PROFILES:
-        USER_PROFILES[user_id] = {
-            "name": username,
-            "level": 1,
-            "xp": 0,
-            "gold": 100,
-            "inventory": ["rusty_sword", "health_potion"]
-        }
-    return USER_PROFILES[user_id]
-
 @bot.event
 async def on_ready():
     print(f"Logged in and active as: {bot.user.name}")
@@ -43,6 +29,28 @@ async def on_ready():
         synced = await bot.tree.sync()
     except Exception as e:
         print(f"Error syncing commands: {e}")
+        
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return None
+
+    was_mentioned = bot.user in message.mentions # message.mentions stores all @ mentions
+    is_reply_to_bot = False
+    
+    if message.reference: # Is the message a refrence to anyone (reply or mention)?
+        if message.reference.cached_message: # Does the bot already has the original message saved in its memory?
+            is_reply_to_bot = message.reference.cached_message.author == bot.user # Check if the message it replied to was from the bot
+        else:
+            try:
+                original_msg = await message.channel.fetch_message(message.reference.message_id) # Get the original message replied to
+                is_reply_to_bot = original_msg.author == bot.user # Check if the message it replied to was from the bot
+            except discord.HTTPException:
+                pass
+
+    if was_mentioned or is_reply_to_bot:
+        await message.reply("beep boop this is my impression of a non-commital robot")
+    await bot.process_commands(message)
 
 @bot.tree.command(name="xkcd", description="Displays an xkcd comic by its number.")
 @app_commands.describe(n="The comic number to fetch")
